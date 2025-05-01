@@ -130,7 +130,7 @@
     <h2 id="abstract">Abstract</h2>
 
 <p>
-  Our project explores the feasibility of using fine-tuned small language models for cryptographic analysis, specifically mono-alphabetic substitution ciphers, to determine whether an LLM can effectively decode messages compared to algorithms or humans.
+  Our project explores the feasibility of using fine-tuned small language models for cryptographic analysis, specifically monoalphabetic substitution ciphers, to determine whether an LLM can effectively decode messages compared to algorithms or humans.
   Large language models such as ChatGPT and Deepseek-R1 struggle immensely with this task, despite their extensive knowledge, computational power, and parameters.
   To investigate this challenge, we fine-tune Qwen2.5-0.5B, a lightweight model with 500 million parameters, as well as Phi-4-Mini and evaluate their performance against larger models. 
   For both models, we implement a feedback system (GRPO) and apply test-time scaling to enhance performance and test with state-of-the-art LLM algorithms for optimal results. 
@@ -198,8 +198,8 @@
   We anticipated success because these methods have proven effective at enhancing LLM performance in other domains, and focusing on a smaller model allows for more efficient and targeted training. 
   Each output has a clear corresponding plain text, which is ideal for training, and we believe the model can learn to recognize patterns in the text.
   To implement this, we utilize a diverse dataset containing varied text samples such as those from <a href="https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text">AI vs Human Text Identification</a>.
-  We then programmatically apply mono-alphabetic substitution ciphers to the text in Python and use these transformed texts as training data.
-  Our reward function for our first training on 2 letter substitution was defined as half length and half accuracy to push the model to return the proper length output, then subsequent trainings on the same model used a purely accuracy driven reward function.
+  We then programmatically apply monoalphabetic substitution ciphers to the text in Python and use these transformed texts as training data.
+  Our reward function for our first training on 2 letter substitution was defined as half length and half accuracy to push the model to return the proper length output, then subsequent training on the same model used a purely accuracy driven reward function.
 </p>
 
 <p>
@@ -224,21 +224,21 @@
 <b>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</b>
 </p>
 <p>
-  We evaluted our project in three main avenues, one was the investigation of directed prompts and their performance, the second was evaluation of reasoning models and tokens generated versus accuracy, and finally a general evaluation of large, trained, and small LLMs on mono-alphabetic substitution ciphers.
+  We evaluated our project in three main avenues, one was the investigation of directed prompts and their performance, the second was evaluation of reasoning models and tokens generated versus accuracy, and finally a general evaluation of large, trained, and small LLMs on monoalphabetic substitution ciphers.
   To get an absolute accuracy score, we use character correctness percentage for equal-length outputs, and <a href="https://rapidfuzz.github.io/RapidFuzz/">RapidFuzz</a> for variable-length comparisons, which is a type of edit distance accuracy calculation.
   All metrics range from 0-100%, with 100% representing perfect accuracy.
   Our first round of tests investigated the performance of different types of <a target="_self" href="./prompts.html">prompts</a> on the same task, specifically directed and undirected versions of the same prompt.
   In this context, directed prompts means that detailed step-by-step instructions were provided in the prompt, whereas undirected prompts simply asked the model to decipher the text.
-  Suprisingly, through testing many different LLM's on both types of prompts, we found that the models performed better when given a more undirected prompt.
+  Surprisingly, through testing many different LLM's on both types of prompts, we found that the models performed better when given a more undirected prompt.
   We believe that this is because the extra directions tend to confuse the models and make them less likely to solve the task.
   This could be due to the fact that the models are not able to understand the extra instructions, or it could be that they are trying to follow the instructions too closely and not focusing on the task at hand.
   On all LLM's tested, only Qwen's accuracy improved with the more directed prompts, while all other models performed better with the less directed prompts.
-  This lead us to chosing a non-directed prompt for our final model.
+  This led us to choosing a non-directed prompt for our final model.
 </p>
 <br>
 <div style="text-align: center;">
   <img alt="" src="./files/accuracy_comparison.png">
-  <caption>Figure 2. Results of 10 total directed versus non-directed prompts in major LLM's. Orange represent directed prompts, and blue represents un-directed prompts. All values are percentages out of 100. </caption>
+  <caption>Figure 2. Results of 10 total directed versus non-directed prompts in major LLM's. Orange represents directed prompts, and blue represents un-directed prompts. All values are percentages out of 100. </caption>
 </div>
 <br>
 <p>
@@ -252,7 +252,7 @@
 <br>
 <div style="text-align: center;">
   <img alt="" src="./files/token_vs_accuracy_graph.png">
-  <caption>Figure 3. Tokens generated versus final plaintext output accuracy. A token in this case is retreived using Deepseek's token calculation which can be found <a href="https://api-docs.deepseek.com/quick_start/token_usage">here</a>. 20 Prompts were tested on both Qwen2.5-Max-Reasoning as well as DeepseekR1.</caption>
+  <caption>Figure 3. Tokens generated versus final plaintext output accuracy. A token in this case is retrieved using Deepseek's token calculation which can be found <a href="https://api-docs.deepseek.com/quick_start/token_usage">here</a>. 20 Prompts were tested on both Qwen2.5-Max-Reasoning as well as DeepseekR1.</caption>
 </div>
 <br>
 <p>
@@ -285,7 +285,7 @@
       <td style="text-align: center">55.7%</td>
     </tr>
     <tr>
-      <td style="text-align: center"><strong>Claude Sonnet 3.7</strong></td>
+      <td style="text-align: center"><strong>Claude 3.7 Sonnet</strong></td>
       <td style="text-align: center">95.8%</td>
       <td style="text-align: center">96.5%</td>
       <td style="text-align: center">99.9%</td>
@@ -339,12 +339,12 @@
       <td style="text-align: center">16.1%</td>
     </tr>
   </tbody>
-  <caption>Table 1. Results of Mono-alphabetic substitution on LLMs</caption>
+  <caption>Table 1. Results of Monoalphabetic substitution on LLMs</caption>
 </table> -->
 <br>
 <div style="text-align: center;">
   <img alt="" src="./files/cipher_accuracy_comparison.png">
-  <caption>Figure 4. Final results of Mono-alphabetic substitution on LLMs. Light blue bars refer to LLM's tested on 20 directed prompts, while orange and purple bars are tested on 500 prompts from our original dataset. Orange defines our final trained models.</caption>
+  <caption>Figure 4. Final results of Monoalphabetic substitution on LLMs. Light blue bars refer to LLM's tested on 20 directed prompts, while orange and purple bars are tested on 500 prompts from our original dataset. Orange defines our final trained models.</caption>
 </div>
 <hr>
 <h2 id="conclusion">Conclusion and Future Work</h2>
@@ -352,10 +352,10 @@
   Our research demonstrates that GRPO can train small models to improve accuracy scores, though the problem currently proves to be too difficult to achieve consistent cipher-solving capability.
   This limitation stems primarily from the model's difficulty with large letter substitution questions, complex iterative problems, as well as difficulty having models return only the plaintext with no added information.
   We've also shown that current state-of-the-art models generally fail at these problems, revealing fundamental LLM limitations in this domain, evident across their respective platforms. 
-  Claude Sonnet 3.7 stands as the exception, providing valuable insights into potential LLM capabilities for such tasks. 
-  We speculate the larger models performance improvments come from the parameter count increases, which can enhance linguistic pattern recognition, even if they don't understand the problem at hand.
+  Claude 3.7 Sonnet stands as the exception, providing valuable insights into potential LLM capabilities for such tasks. 
+  We speculate the larger models' performance improvements come from the parameter count increases, which can enhance linguistic pattern recognition, even if they don't understand the problem at hand.
   Our current model faces one major constraint when attempting decryption, the model often tends to substitute letters incorrectly or generates random English text to maximize apparent accuracy. 
-  Future work testing with larger models, different training methods, and larger datasets is needed to potentially create a model that can match Claude Sonnet 3.7's success on this task.
+  Future work testing with larger models, different training methods, and larger datasets is needed to potentially create a model that can match Claude 3.7 Sonnet's success on this task.
   Overall, we've identified an intriguing challenge that confounds current leading systems, suggesting the need for further research into LLM applications in cryptography.
 </p>
 
